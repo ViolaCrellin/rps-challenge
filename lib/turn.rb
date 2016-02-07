@@ -1,4 +1,5 @@
 require_relative 'computer'
+require_relative 'opponent'
 
 
 class Turn
@@ -8,12 +9,16 @@ RULES = {
   rock: 'scissors',
   paper: 'rock'
 }
-attr_reader :p1_weapon, :p2_weapon, :result
+attr_reader :p1_weapon, :p2_weapon, :result, :p2
 
-  def initialize(p1_weapon, p2_turn=ComputerTurn)
+
+  def initialize(p1_weapon, p2)
     @p1_weapon = p1_weapon
-    @p2_weapon = p2_turn.new.weapon
+    @p2_weapon = p2.weapon
+    #will contain either a ComputerTurn or a Opponent from the controller
   end
+
+
 
   def result
     if p1_win?

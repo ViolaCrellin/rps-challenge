@@ -29,9 +29,9 @@ class RPS < Sinatra::Base
       session[:opponent_id] = opponent_id
     end
 
-    def single_player?
-      session_player.name.length >1
-    end
+    # def no_session_player?
+    #   session_player.name.length <1
+    # end
 
   end
 
@@ -43,19 +43,18 @@ class RPS < Sinatra::Base
     if params[:opponent_name] == "Computer"
       remember(Player.new(params[:player_name]))
       redirect '/play'
+    elsif params[:player_name].length < 1 && params[:opponent_name].length > 1
+      remember(Player.new(params[:opponent_name]))
+      redirect '/play'
     else
       remember(Player.new(params[:player_name]))
       assign(Opponent.new(params[:opponent_name]))
-      redirect '/multiplayer_check'
+      redirect '/multiplayer'
     end
   end
 
   get '/play' do
-    if single_player?
-      @player = session_player.name
-    else
-      @player = opponent.name
-    end
+    @player = session_player.name
     erb :play
   end
 
@@ -64,35 +63,48 @@ class RPS < Sinatra::Base
     redirect '/the_choices'
   end
 
-  get '/multiplayer_check' do
-    if single_player?
-      redirect '/multiplayer'
-    else
-      redirect '/play'
-    end
+  get '/the_choices' do
+    @p1_weapon = session_player.p1_weapon
+    @p2_weapon = session_player.opponent_weapon
+    @result = session_player.result
+    @player = session_player.name
+    erb :the_choices
   end
 
-  get '/multiplayer' do
-    @player = session_player.name
+  get '/multiplayer1' do
+    # @player = session_player.name
     @opponent = opponent.name
     erb :multiplayer
   end
 
-  post '/multiplayer' do
-    session_player.new_turn(params[:weapon_choice_1])
-    opponent.assign_weapon(params[:weapon_choice_2])
-    redirect '/the_choices'
+  post '/multiplayer1' do
+    session[:real_opponent] = opponent.assign_weapon(params[:weapon_choice_2])
+    # session_player.new_turn(params[:weapon_choice_1], session[:real_opponent])
+    redirect '/multiplayer2'
   end
 
-
-
-  get '/the_choices' do
+  get '/multiplayer2' do
     @player = session_player.name
-    @p1_weapon = session_player.p1_weapon
-    @p2_weapon = session_player.opponent_weapon
-    @result = session_player.result
-    erb :the_choices
+    # @opponent = opponent.name
+    erb :multiplayer
   end
+
+
+  post '/multiplayer2' do
+    # session[:real_opponent] = opponent.assign_weapon(params[:weapon_choice_2])
+    session_player.new_turn(params[:weapon_choice_1], session[:real_opponent])
+    redirect '/the_result'
+  end
+
+  get '/the_result' do
+    @player = session_player.name
+    @p1_weapon = session_player.weapon
+    @opponent = opponent.name
+    @p2_weapon = opponent.weapon
+    @result = session_player.result
+    erb :the_result
+  end
+
 
   run! if app_file == $0
 end

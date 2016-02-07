@@ -21,7 +21,7 @@ class Opponent
   attr_reader :name, :weapon
 
 
-    def initialize(name, weapon=ComputerTurn.new.weapon)
+    def initialize(name, weapon=nil)
       @name = name
       @weapon = weapon
     end

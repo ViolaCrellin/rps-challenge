@@ -2,21 +2,14 @@ require 'turn'
 
 describe Turn do
   let(:p1_weapon) {double :p1_weapon}
-  let(:computer_turn_klass) {double :computer_turn_klass}
   let(:computer_turn) {double :computer_turn}
   let(:computer_weapon) {double :computer_weapon}
-  subject(:turn) {described_class.new(p1_weapon, computer_turn_klass)}
+  subject(:turn) {described_class.new(p1_weapon, computer_turn)}
 
   describe 'initialize' do
 
     before do
-      allow(computer_turn_klass).to receive(:new).and_return(computer_turn)
       allow(computer_turn).to receive(:weapon).and_return(computer_weapon)
-    end
-
-    it 'simultaneously initializes a new computer turn' do
-      expect(computer_turn_klass).to receive(:new)
-      turn
     end
 
     it 'stores the computer\'s weapon choice' do
@@ -29,7 +22,7 @@ describe Turn do
 
     describe '#result' do
       context 'p1 weapon is scissors' do
-      subject(:turn) {described_class.new(:scissors, computer_turn_klass)}
+      subject(:turn) {described_class.new(:scissors, computer_turn)}
 
         it 'decides a winner for p1 scissors and p2 paper' do
            allow(computer_turn).to receive(:weapon).and_return(:paper)
@@ -45,7 +38,7 @@ describe Turn do
         end
       end
       context 'p2 weapon is paper' do
-      subject(:turn) {described_class.new(:paper, computer_turn_klass)}
+      subject(:turn) {described_class.new(:paper, computer_turn)}
 
         it 'decides a winner for p1 paper and p2 scissors' do
            allow(computer_turn).to receive(:weapon).and_return(:rock)
@@ -61,7 +54,7 @@ describe Turn do
         end
       end
       context 'p2 weapon is rock' do
-      subject(:turn) {described_class.new(:rock, computer_turn_klass)}
+      subject(:turn) {described_class.new(:rock, computer_turn)}
 
         it 'decides a winner for p1 rock and p2 scissors' do
            allow(computer_turn).to receive(:weapon).and_return(:scissors)

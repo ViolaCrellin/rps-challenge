@@ -27,9 +27,9 @@ class Player
     end
 
 
-    def new_turn(weapon_choice)
+    def new_turn(weapon_choice, p2=ComputerTurn.new)
       @p1_weapon = weapon_choice.to_sym
-      @turn = turn_klass.new(p1_weapon)
+      @turn = turn_klass.new(p1_weapon, p2)
     end
 
     def opponent_weapon
