@@ -13,8 +13,8 @@ describe Player do
       it 'stores @players when .add is called' do
         expect{player.add(player_id, player_name)}.to change{player.players.size}.by(1)
       end
-
     end
+
     describe '.add' do
 
       before do
@@ -24,7 +24,6 @@ describe Player do
       it '.adds a Player class object to the @players hash' do
         expect(player.players).to include ({player_id => player_name})
       end
-
     end
 
     describe '.look_up' do
@@ -36,7 +35,6 @@ describe Player do
       it 'will .look_up a Player class object' do
         expect(player.look_up(player_id)).to eq player_name
       end
-
     end
   end
 

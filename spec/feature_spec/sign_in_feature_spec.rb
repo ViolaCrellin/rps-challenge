@@ -13,5 +13,9 @@ feature 'Player Set up' do
     expect(page).to have_content('Soulless Marketeer and "Friend"')
   end
 
+  scenario 'Missing entry for player one' do
+    sign_up_multiplayer_missing
+    expect(page).to have_content('Hi there "Friend"')
+  end
 
 end

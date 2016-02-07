@@ -9,26 +9,13 @@ class Player
       @players ||= {}
     end
 
-    def opponents
-      @opponents ||= {}
-    end
-
     def add(player_id, name)
       players[player_id] = name
-    end
-
-    def assign(player_id, name)
-      opponents[player_id] = name
     end
 
     def look_up(player_id)
       players[player_id]
     end
-
-    def match_opponent(player_id)
-      opponents[player_id]
-    end
-
   end
 
   attr_reader :name, :p1_weapon, :turn_klass, :turn

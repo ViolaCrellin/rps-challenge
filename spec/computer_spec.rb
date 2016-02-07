@@ -13,7 +13,7 @@ describe ComputerTurn do
   describe 'weapon' do
 
     it 'stores the computer\'s weapon choice' do
-      allow_any_instance_of(Array).to receive(:sample).and_return(weapon_choice)
+      allow(ComputerTurn::WEAPONS).to receive(:sample).and_return(weapon_choice)
       expect(computer.weapon).to eq weapon_choice
     end
   end
