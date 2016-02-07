@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'rack'
 require_relative '../lib/player'
 require_relative '../lib/turn'
+require_relative '../lib/opponent'
 
 class RPS < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 2592000
@@ -19,12 +20,12 @@ class RPS < Sinatra::Base
     end
 
     def opponent
-      Player.look_up(session[:opponent_id])
+      Opponent.look_up(session[:opponent_id])
     end
 
     def assign(opponent)
       opponent_id = opponent.object_id
-      Player.add(opponent_id, opponent)
+      Opponent.add(opponent_id, opponent)
       session[:opponent_id] = opponent_id
     end
 
@@ -40,7 +41,7 @@ class RPS < Sinatra::Base
       redirect '/play'
     else
       remember(Player.new(params[:player_name]))
-      assign(Player.new(params[:opponent_name]))
+      assign(Opponent.new(params[:opponent_name]))
       redirect '/multiplayer_check'
     end
   end
@@ -52,6 +53,11 @@ class RPS < Sinatra::Base
       @player = opponent.name
     end
     erb :play
+  end
+
+  post '/play' do
+    session_player.new_turn(params[:weapon_choice])
+    redirect '/the_choices'
   end
 
   get '/multiplayer_check' do
@@ -68,11 +74,14 @@ class RPS < Sinatra::Base
     erb :multiplayer
   end
 
-  post '/play' do
-    weapon_choice = params[:weapon_choice]
-    session_player.new_turn(weapon_choice)
-    redirect '/the_choices'
+  post '/multiplayer' do
+    @player = session_player.name
+    session_player.new_turn(params[:weapon_choice_1])
+    opponent.assign_weapon(params[:weapon_choice_2])
+    erb :multiplayer
   end
+
+
 
   get '/the_choices' do
     @player = session_player.name

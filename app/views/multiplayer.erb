@@ -6,15 +6,21 @@
   </head>
 
   <body>
-    <h1> Choose your weapons <%= @player %> and <%= @opponent %> </h1>
-      <form action= "/play" method= "post">
-        <input type="image" name="weapon_choice" value="rock" src="http://heavyeditorial.files.wordpress.com/2013/04/tumblr_lvb1i6pwa31qgc0j0.gif">
+
+
+      <form action= "/play" method= "post" id="weapon_choice_1">
+        <h1> Choose your weapon <%= @player %> </h1>
+        <input type="image" name="weapon_choice_1" value="rock" src="http://heavyeditorial.files.wordpress.com/2013/04/tumblr_lvb1i6pwa31qgc0j0.gif">
+        <input type="image" name="weapon_choice_1" value="paper" src="http://cdn.makeagif.com/media/2-06-2016/z9tH1P.gif">
+        <input type="image" name="weapon_choice_1" value="scissors" src="https://media.giphy.com/media/h6vTQ4kBIEP1m/giphy.gif" >
       </form>
-      <form action= "/play" method= "post">
-        <input type="image" name="weapon_choice" value="paper" src="http://cdn.makeagif.com/media/2-06-2016/z9tH1P.gif">
-      </form>
-      <form action= "/play" method= "post">
-        <input type="image" name="weapon_choice" value="scissors" src="https://media.giphy.com/media/h6vTQ4kBIEP1m/giphy.gif" >
-      </form>
+
+      <form action= "/play" method= "post" id="weapon_choice_2">
+        <h1> Choose your weapon <%= @opponent %></h1>
+          <input type="image" name="weapon_choice_2" value="rock" src="http://heavyeditorial.files.wordpress.com/2013/04/tumblr_lvb1i6pwa31qgc0j0.gif">
+          <input type="image" name="weapon_choice_2" value="paper" src="http://cdn.makeagif.com/media/2-06-2016/z9tH1P.gif">
+          <input type="image" name="weapon_choice_2" value="scissors" src="https://media.giphy.com/media/h6vTQ4kBIEP1m/giphy.gif" >
+        </form>
+
   </body>
 </html>
