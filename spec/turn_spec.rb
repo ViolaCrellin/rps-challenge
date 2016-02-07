@@ -28,7 +28,7 @@ describe Turn do
     end
 
     describe '#result' do
-      context 'p2 weapon is scissors' do
+      context 'p1 weapon is scissors' do
       subject(:turn) {described_class.new(:scissors, computer_turn_klass)}
 
         it 'decides a winner for p1 scissors and p2 paper' do

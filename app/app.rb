@@ -12,11 +12,22 @@ class RPS < Sinatra::Base
       Player.look_up(session[:player_id])
     end
 
+    def opponent
+      Player.match_opponent(session[:opponent_id])
+    end
+
     def remember(player)
       player_id = player.object_id
       Player.add(player_id, player)
       session[:player_id] = player_id
     end
+
+    def assign(opponent)
+      opponent_id = opponent.object_id
+      Player.assign(opponent_id, opponent)
+      session[:opponent_id] = opponent_id
+    end
+
   end
 
   get '/' do
@@ -24,13 +35,25 @@ class RPS < Sinatra::Base
   end
 
   post '/name' do
-    remember(Player.new(params[:player_name]))
-    redirect '/play'
+    if params[:opponent_name] == "Computer"
+      remember(Player.new(params[:player_name]))
+      redirect '/play'
+    else
+      remember(Player.new(params[:player_name]))
+      assign(Player.new(params[:opponent_name]))
+      redirect '/multiplayer'
+    end
   end
 
   get '/play' do
     @player = session_player.name
     erb :play
+  end
+
+  get '/multiplayer' do
+    @player = session_player.name
+    @opponent = opponent.name
+    erb :multiplayer
   end
 
   post '/play' do
