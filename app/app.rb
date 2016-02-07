@@ -29,6 +29,10 @@ class RPS < Sinatra::Base
       session[:opponent_id] = opponent_id
     end
 
+    def single_player?
+      session_player.name.length >1
+    end
+
   end
 
   get '/' do
@@ -47,7 +51,7 @@ class RPS < Sinatra::Base
   end
 
   get '/play' do
-    if session_player.name.length >1
+    if single_player?
       @player = session_player.name
     else
       @player = opponent.name
@@ -61,7 +65,7 @@ class RPS < Sinatra::Base
   end
 
   get '/multiplayer_check' do
-    if session_player.name.length > 1
+    if single_player?
       redirect '/multiplayer'
     else
       redirect '/play'
@@ -75,10 +79,9 @@ class RPS < Sinatra::Base
   end
 
   post '/multiplayer' do
-    @player = session_player.name
     session_player.new_turn(params[:weapon_choice_1])
     opponent.assign_weapon(params[:weapon_choice_2])
-    erb :multiplayer
+    redirect '/the_choices'
   end
 
 
