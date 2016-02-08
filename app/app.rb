@@ -74,7 +74,7 @@ class RPS < Sinatra::Base
 
   get '/multiplayer' do
     @player = session_player.name
-    @opponent_name = opponent.name
+    @opponent = opponent.name
     erb :multiplayer
   end
 

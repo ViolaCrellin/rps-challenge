@@ -8,12 +8,14 @@
     <body>
       <h1> <%= @player %> chose <%= @p1_weapon %> </h1>
       <h1> <%= @opponent %> chose <%= @p2_weapon %> </h1>
-      <!-- <% if @result == :win %>
-      <h1> <%= @player %>. YOU ARE A WINNER! But you're still a loser for being a Marketeer' </h1>
+      <% if @result == :win %>
+      <h1> <%= @player %>. YOU ARE A WINNER! But you're still a loser for being a Marketeer</h1>
+      <h1> <%= @opponent %>. YOU ARE A LOSER! But I suppose you're used to hearing that as a Marketeer</h1>
       <% elsif @result == :lose %>
-      <h1> <%= @player %>. YOU ARE A LOSER! But I suppose you're used to hearing that as a Marketeer'</h1>
+      <h1> <%= @player %>. YOU ARE A LOSER! But I suppose you're used to hearing that as a Marketeer</h1>
+      <h1> <%= @opponent %>. YOU ARE A WINNER! But you're still a loser for being a Marketeer</h1>
       <% else %>
-      <h1> <%= @player %>. It's a draw. But you're still a loser for being a Marketeer'</h1>
-      <% end %> -->
+      <h1> <%= @player %>. It's a draw. But you're still both losers for being Marketeers</h1>
+      <% end %>
     <body>
 <html>
