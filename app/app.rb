@@ -78,8 +78,12 @@ class RPS < Sinatra::Base
   end
 
   post '/multiplayer' do
-    @current_opponent = opponent.assign_weapon(params[:weapon_choice_2])
-    session_player.new_turn(params[:weapon_choice_1], current_opponent)
+    @opponent_weapon = params[:weapon_choice_2]
+    @player_weapon = params[:weapon_choice_1]
+    # require 'pry'; binding.pry
+    @assigned_weapon = opponent.assign_weapon(params[:weapon_choice_2])
+    # binding.pry
+    session_player.new_turn(@player_weapon, @assigned_weapon)
     redirect '/the_result'
   end
 
