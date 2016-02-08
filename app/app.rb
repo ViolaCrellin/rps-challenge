@@ -1,5 +1,6 @@
 require 'sinatra/base'
 require 'rack'
+require 'pry'
 require_relative '../lib/player'
 require_relative '../lib/turn'
 require_relative '../lib/opponent'
@@ -73,36 +74,19 @@ class RPS < Sinatra::Base
 
   get '/multiplayer' do
     @player = session_player.name
-    @opponent = opponent.name
+    @opponent_name = opponent.name
     erb :multiplayer
   end
 
   post '/multiplayer' do
-    @opponent_weapon = params[:weapon_choice_2]
-    @player_weapon = params[:weapon_choice_1]
-    # require 'pry'; binding.pry
-    @assigned_weapon = opponent.assign_weapon(params[:weapon_choice_2])
-    # binding.pry
-    session_player.new_turn(@player_weapon, @assigned_weapon)
+    opponent.assign_weapon(params[:weapon_choice_2])
+    session_player.new_turn(params[:weapon_choice_1], opponent)
     redirect '/the_result'
   end
 
-  # get '/multiplayer2' do
-  #   @player = session_player.name
-  #   # @opponent = opponent.name
-  #   erb :multiplayer
-  # end
-
-
-  # post '/multiplayer2' do
-  #   # session[:real_opponent] = opponent.assign_weapon(params[:weapon_choice_2])
-  #   session_player.new_turn(params[:weapon_choice_1], session[:real_opponent])
-  #   redirect '/the_result'
-  # end
-
   get '/the_result' do
     @player = session_player.name
-    @p1_weapon = session_player.weapon
+    @p1_weapon = session_player.p1_weapon
     @opponent = opponent.name
     @p2_weapon = session_player.opponent_weapon
     @result = session_player.result

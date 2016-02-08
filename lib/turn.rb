@@ -9,12 +9,13 @@ RULES = {
   rock: 'scissors',
   paper: 'rock'
 }
-attr_reader :p1_weapon, :p2_weapon, :result, :p2
+attr_reader :p1_weapon, :p2_weapon, :result
 
 
   def initialize(p1_weapon, p2)
     @p1_weapon = p1_weapon
-    @p2_weapon = p2.weapon
+    @p2_weapon = p2
+    # .weapon
     #will contain either a ComputerTurn or a Opponent from the controller
   end
 

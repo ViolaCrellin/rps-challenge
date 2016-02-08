@@ -21,13 +21,15 @@ class Opponent
   attr_reader :name
   attr_accessor :weapon
 
+
     def initialize(name)
       @name = name
-      @weapon = weapon
+      @weapon = "potatoe"
     end
 
-    def assign_weapon(weapon)
-      @weapon = weapon.to_sym
+    def assign_weapon(weapon_chosen)
+      @weapon = weapon_chosen.to_sym
+      # self
     end
 
 end
