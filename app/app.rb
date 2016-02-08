@@ -71,36 +71,36 @@ class RPS < Sinatra::Base
     erb :the_choices
   end
 
-  get '/multiplayer1' do
-    # @player = session_player.name
+  get '/multiplayer' do
+    @player = session_player.name
     @opponent = opponent.name
     erb :multiplayer
   end
 
-  post '/multiplayer1' do
-    session[:real_opponent] = opponent.assign_weapon(params[:weapon_choice_2])
-    # session_player.new_turn(params[:weapon_choice_1], session[:real_opponent])
-    redirect '/multiplayer2'
-  end
-
-  get '/multiplayer2' do
-    @player = session_player.name
-    # @opponent = opponent.name
-    erb :multiplayer
-  end
-
-
-  post '/multiplayer2' do
-    # session[:real_opponent] = opponent.assign_weapon(params[:weapon_choice_2])
-    session_player.new_turn(params[:weapon_choice_1], session[:real_opponent])
+  post '/multiplayer' do
+    @current_opponent = opponent.assign_weapon(params[:weapon_choice_2])
+    session_player.new_turn(params[:weapon_choice_1], current_opponent)
     redirect '/the_result'
   end
+
+  # get '/multiplayer2' do
+  #   @player = session_player.name
+  #   # @opponent = opponent.name
+  #   erb :multiplayer
+  # end
+
+
+  # post '/multiplayer2' do
+  #   # session[:real_opponent] = opponent.assign_weapon(params[:weapon_choice_2])
+  #   session_player.new_turn(params[:weapon_choice_1], session[:real_opponent])
+  #   redirect '/the_result'
+  # end
 
   get '/the_result' do
     @player = session_player.name
     @p1_weapon = session_player.weapon
     @opponent = opponent.name
-    @p2_weapon = opponent.weapon
+    @p2_weapon = session_player.opponent_weapon
     @result = session_player.result
     erb :the_result
   end

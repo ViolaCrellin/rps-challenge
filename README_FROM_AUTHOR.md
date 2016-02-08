@@ -41,6 +41,20 @@ I would like to be able to play rock/paper/scissors
 USAGE GUIDE:
 ```ruby
 irb
+2.2.3 :001 > require './lib/player.rb'
+ => true
+2.2.3 :002 > player = Player.new('viola')
+ => #<Player:0x007ffe65075948 @name="viola", @turn_klass=Turn>
+2.2.3 :003 > opponent = Opponent.new('Johny')
+ => #<Opponent:0x007ffe65015750 @name="Johny", @weapon=nil>
+2.2.3 :004 > opponent.assign_weapon("scissors")
+ => #<Opponent:0x007ffe65015750 @name="Johny", @weapon=:scissors>
+2.2.3 :005 > opponent
+ => #<Opponent:0x007ffe65015750 @name="Johny", @weapon=:scissors>
+2.2.3 :006 > player.new_turn("rock", opponent)
+ => #<Turn:0x007ffe640ee768 @p1_weapon=:rock, @p2_weapon=:scissors>
+2.2.3 :007 > player.result
+ => :win
 ```
 
 CLASSES:

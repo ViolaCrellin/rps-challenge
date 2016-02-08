@@ -7,24 +7,25 @@
 
   <body>
 
-      <form action= "/multiplayer2" id="weapon_choice_1" method= "post">
+      <form action= "/multiplayer" id="weapon_choice_1" method= "post">
         <label for="weapon_choice_1">
         <h1> Choose your weapon <%= @player %> </h1>
         <input type="radio" name="weapon_choice_1" value="rock" src="http://heavyeditorial.files.wordpress.com/2013/04/tumblr_lvb1i6pwa31qgc0j0.gif">
         <input type="radio" name="weapon_choice_1" value="paper" src="http://cdn.makeagif.com/media/2-06-2016/z9tH1P.gif">
         <input type="radio" name="weapon_choice_1" value="scissors" src="https://media.giphy.com/media/h6vTQ4kBIEP1m/giphy.gif" >
-        <input type="submit" value="Chosen">
       </label>
     </form>
-
-    <form action="/multiplayer1" method="post">
+      <form action= "/multiplayer" id="weapon_choice_2" method= "post">
       <label for="weapon_choice_2" name="weapon_choice_2" class="weapon_choice_2">
         <h1> Choose your weapon <%= @opponent %></h1>
-          <input type="radio" name="weapon_choice_2" value="rock" src="http://heavyeditorial.files.wordpress.com/2013/04/tumblr_lvb1i6pwa31qgc0j0.gif">
+          <input type="radio" name="weapon_choice_2" value="rock">
+          <img src="http://heavyeditorial.files.wordpress.com/2013/04/tumblr_lvb1i6pwa31qgc0j0.gif">
           <input type="radio" name="weapon_choice_2" value="paper" src="http://cdn.makeagif.com/media/2-06-2016/z9tH1P.gif">
           <input type="radio" name="weapon_choice_2" value="scissors" src="https://media.giphy.com/media/h6vTQ4kBIEP1m/giphy.gif" >
-          <input type="submit" value="Chosen">
         </label>
       </form>
+    <form action='/multiplayer' method='post'>
+      <input type="submit" value="Chosen">
+    </form>
   </body>
 </html>

@@ -18,16 +18,16 @@ class Opponent
     end
   end
 
-  attr_reader :name, :weapon
+  attr_reader :name
+  attr_accessor :weapon
 
-
-    def initialize(name, weapon=nil)
+    def initialize(name)
       @name = name
       @weapon = weapon
     end
 
     def assign_weapon(weapon)
-      @weapon = weapon
+      @weapon = weapon.to_sym
     end
 
 end

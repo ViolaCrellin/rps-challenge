@@ -42,26 +42,23 @@ describe Opponent do
   context 'instance methods' do
     let(:name) {double :name}
     let(:weapon_choice) {double :weapon_choice}
-    let(:weapon_choice_2) {double :weapon_choice_2}
-    subject(:real_opponent) {described_class.new(name, weapon_choice)}
+    subject(:opponent) {described_class.new(name)}
 
     describe '#initialize' do
 
-      it 'stores the opponent\'s weapon' do
-        expect(real_opponent.weapon).to eq weapon_choice
-      end
 
       it 'stores the opponent\'s name' do
-        expect(real_opponent.name).to eq name
+        expect(opponent.name).to eq name
       end
 
     end
 
     describe '#assign_weapon' do
 
-      it 'allows the weapon to be reassigned' do
-        real_opponent.assign_weapon(weapon_choice_2)
-        expect(real_opponent.weapon).to eq weapon_choice_2
+      xit 'stores the weapon choice' do
+        allow(weapon_choice).to receive(:to_sym)
+        opponent.assign_weapon(weapon_choice)
+        expect(opponent.weapon).to eq weapon_choice
       end
     end
   end
